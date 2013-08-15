@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	
+	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean name="openSessionInViewInterceptor" class="org.springframework.orm.hibernate4.support.OpenSessionInViewInterceptor">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="packagesToScan" value="org.anajo.server.comp" />
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">${jdbc.anajo.hibernate.dialect}</prop>
+<!-- 				<prop key="hibernate.hbm2ddl.auto">create</prop> -->
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.connection.autocommit">false</prop>
+				<prop key="hibernate.query.substitutions">true 1,false 0</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${jdbc.anajo.dataSource}" />
+		<property name="url" value="${jdbc.anajo.url}" />
+		<property name="username" value="${jdbc.anajo.username}" />
+		<property name="password" value="${jdbc.anajo.password}" />
+		<property name="maxActive" value="30" />
+		<property name="maxIdle" value="5" />
+		<property name="maxWait" value="60000" />
+		<property name="validationQuery" value="SELECT 1" />
+		<property name="logAbandoned" value="false" />
+		<property name="removeAbandoned" value="false" />
+		<property name="removeAbandonedTimeout" value="50000" />
+	</bean>
+
+	<bean id="propertyConfigure" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>/WEB-INF/spring/database/jdbc.properties</value>
+			</list>
+		</property>
+	</bean>
+
+</beans>
