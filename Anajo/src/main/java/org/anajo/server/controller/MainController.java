@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * Handles requests for the application home page.
  */
 @Controller
-@RequestMapping("")
 public class MainController {
 
 	private static final Logger logger = LoggerFactory
