@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.anajo</groupId>
 	<artifactId>anajo-server</artifactId>
-	<name>Anajo</name>
+	<name>anajo</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
