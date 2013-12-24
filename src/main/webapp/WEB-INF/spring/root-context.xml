@@ -15,5 +15,8 @@
 
 	<!-- Spring Security -->
 	<import resource="security/security-context.xml" />
+	
+	<!-- EhCache -->
+	<import resource="ehcache/ehcache.xml" />
 		
 </beans>
