@@ -16,6 +16,7 @@ public class MenuHibernateDao implements MenuDao {
 	@Autowired
 	SessionFactory sessionFactory;
 
+	@Cacheable(cacheName="CacheExample")
 	@Override
 	public List<Menu> getMenuList() {
 		Session session = sessionFactory.getCurrentSession();
@@ -23,6 +24,7 @@ public class MenuHibernateDao implements MenuDao {
 		return criteria.list();
 	}
 
+	@Cacheable(cacheName="CacheExample")
 	@Override
 	public List<Menu> getMenuList(String menuId) {
 		Session session = sessionFactory.getCurrentSession();
@@ -31,24 +33,28 @@ public class MenuHibernateDao implements MenuDao {
 		return criteria.list();
 	}
 
+	@Cacheable(cacheName="CacheExample")
 	@Override
 	public Menu getMenu(String menuId) {
 		Session session = sessionFactory.getCurrentSession();
 		return (Menu) session.get(Menu.class, menuId);
 	}
 
+	@TriggersRemove(cacheName="CacheExample", removeAll=true, when=When.AFTER_METHOD_INVOCATION)
 	@Override
 	public void insertMenu(Menu menu) {
 		Session session = sessionFactory.getCurrentSession();
 		session.save(menu);
 	}
 
+	@TriggersRemove(cacheName="CacheExample", removeAll=true, when=When.AFTER_METHOD_INVOCATION)
 	@Override
 	public void updateMenu(Menu menu) {
 		Session session = sessionFactory.getCurrentSession();
 		session.update(menu);
 	}
 
+	@TriggersRemove(cacheName="CacheExample", removeAll=true, when=When.AFTER_METHOD_INVOCATION)
 	@Override
 	public void deleteMenu(Menu menu) {
 		Session session = sessionFactory.getCurrentSession();
