@@ -128,6 +128,19 @@
 			<artifactId>tiles-extras</artifactId>
 			<version>${tiles-version}</version>
 		</dependency>
+		
+		<!-- JSON View -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
 
 		<!-- dbcp -->
 		<dependency>
