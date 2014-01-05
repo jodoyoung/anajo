@@ -5,7 +5,7 @@
 
 <header>
 	<div id="logo">
-		<a href="<c:url value="/" />">Anajo</a>
+		<a href="<c:url value="/" />"><img src="<c:url value="/resources/img/logo.png" />" alt="anajo" /></a>
 	</div>
 	<div id="reg">
 		<sec:authorize access="!hasRole('ROLE_USER')">

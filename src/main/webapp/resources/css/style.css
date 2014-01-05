@@ -51,6 +51,11 @@ div#logo {
 	float: left;
 }
 
+div#logo a img {
+	width:300px;
+	height:70px;
+}
+
 div#reg {
 	float: right;
 }
