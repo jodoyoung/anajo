@@ -278,8 +278,7 @@
 				<configuration>
 					<url>http://localhost:8080/manager/text</url>
 					<path>/</path>
-					<username>jodoyoung</username>
-					<password>whdksk36</password>
+					<server>Tomcat7</server>
 				</configuration>
 			</plugin>
         </plugins>
