@@ -13,7 +13,7 @@ CREATE USER 'anajo' IDENTIFIED BY 'whdksk36';
 GRANT ALL on anajo.* TO anajo@'%';
 
 /* 설정 반영 */
---flush privileges;
+flush privileges;
 
 /* 사용자 외부접속 허용 */
 --GRANT ALL PRIVILEGES ON anajo.* TO 'anajo'@'%' IDENTIFIED BY 'whdksk36' WITH GRANT OPTION;
