@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:ehcache="http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring/ehcache-spring-1.1.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	
+	<!-- System config properties -->
+	<util:properties id="config" location="/WEB-INF/config/config.xml" />
+	
+	<!-- Controller Scan -->
+	<context:component-scan base-package="org.anajo.server.comp" />
+
+	<!-- Database Configuration -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	
+	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean name="openSessionInViewInterceptor" class="org.springframework.orm.hibernate4.support.OpenSessionInViewInterceptor">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="packagesToScan" value="org.anajo.server.comp" />
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">#{config['jdbc.anajo.hibernate.dialect']}</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.connection.autocommit">false</prop>
+				<prop key="hibernate.query.substitutions">true 1,false 0</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="#{config['jdbc.anajo.dataSource']}" />
+		<property name="url" value="#{config['jdbc.anajo.url']}" />
+		<property name="username" value="#{config['jdbc.anajo.username']}" />
+		<property name="password" value="#{config['jdbc.anajo.password']}" />
+		<property name="maxActive" value="30" />
+		<property name="maxIdle" value="5" />
+		<property name="maxWait" value="60000" />
+		<property name="validationQuery" value="#{config['jdbc.anajo.validation.query']}" />
+		<property name="logAbandoned" value="false" />
+		<property name="removeAbandoned" value="false" />
+		<property name="removeAbandonedTimeout" value="50000" />
+	</bean>
+	
+	<!-- EhCache -->
+	<ehcache:annotation-driven cache-manager="cacheManager" />
+	
+	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
+		<property name="cacheManager">
+            <bean class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+                <property name="configLocation" value="/WEB-INF/config/ehcache-config.xml"></property>
+            </bean>
+        </property>
+    </bean>
+		
+</beans>
