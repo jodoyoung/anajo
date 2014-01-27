@@ -50,7 +50,7 @@
 
 	<!-- Tailes -->
 	<bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
-		<property name="definitions" value="/WEB-INF/config/tiles-layout.xml" />
+		<property name="definitions" value="/WEB-INF/config/tiles.xml" />
 		<property name="preparerFactoryClass" value="org.springframework.web.servlet.view.tiles2.SpringBeanPreparerFactory" />
 	</bean>
 
