@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.anajo.server.comp.member.MemberService;
 import org.anajo.server.comp.member.model.Member;
+import org.anajo.server.comp.role.RoleManager;
 import org.anajo.server.comp.role.model.Role;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +29,10 @@ public class AuthSecurityService implements AuthService, UserDetailsService {
 			.getLogger(AuthSecurityService.class);
 
 	@Autowired
-	MemberService memberService;
+	private MemberService memberService;
+
+	@Autowired
+	private RoleManager roleManager;
 
 	@Autowired
 	private HttpServletRequest request;
@@ -49,9 +53,11 @@ public class AuthSecurityService implements AuthService, UserDetailsService {
 			throws UsernameNotFoundException {
 
 		Member member = memberService.getMemberByEmail(email);
+		member.setRoles(roleManager.getUserRoles(member.getMemberId()));
 
-		if (member == null)
+		if (member == null) {
 			throw new UsernameNotFoundException("User Not Found!");
+		}
 
 		logger.debug("Member >>> {}", member);
 

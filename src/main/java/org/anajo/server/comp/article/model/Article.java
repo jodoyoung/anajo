@@ -4,11 +4,7 @@ import java.io.Serializable;
 import java.util.Calendar;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  * 게시글
@@ -16,8 +12,6 @@ import javax.persistence.Transient;
  * @author jodoyoung
  * @date 2012. 7. 13.
  */
-@Entity
-@Table(name = "article")
 public class Article implements Serializable {
 
 	private static final long serialVersionUID = 7391924489928215080L;
@@ -40,8 +34,6 @@ public class Article implements Serializable {
 	public Article() {
 	}
 
-	@Id
-	@Column(name = "article_id")
 	public String getArticleId() {
 		return articleId;
 	}
@@ -50,7 +42,6 @@ public class Article implements Serializable {
 		this.articleId = articleId;
 	}
 
-	@Column(name = "title")
 	public String getTitle() {
 		return title;
 	}
@@ -59,7 +50,6 @@ public class Article implements Serializable {
 		this.title = title;
 	}
 
-	@Column(name = "content")
 	public String getContent() {
 		return content;
 	}
@@ -68,7 +58,6 @@ public class Article implements Serializable {
 		this.content = content;
 	}
 
-	@Column(name = "reg_date")
 	public Calendar getRegDate() {
 		return regDate;
 	}
@@ -77,7 +66,6 @@ public class Article implements Serializable {
 		this.regDate = regDate;
 	}
 
-	@Transient
 	public List<String> getFiles() {
 		return files;
 	}
@@ -114,8 +102,7 @@ public class Article implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Article [articleId=" + articleId + ", title=" + title
-				+ ", content=" + content + ", regDate=" + regDate + "]";
+		return ToStringBuilder.reflectionToString(this);
 	}
 
 }

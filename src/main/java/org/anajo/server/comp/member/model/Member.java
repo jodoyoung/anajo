@@ -1,19 +1,12 @@
 package org.anajo.server.comp.member.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-import javax.persistence.Transient;
-
 import org.anajo.server.comp.role.model.Role;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  * 사용자
@@ -21,8 +14,6 @@ import org.anajo.server.comp.role.model.Role;
  * @author jodoyoung
  * 
  */
-@Entity
-@Table(name = "member")
 public class Member implements Serializable {
 
 	private static final long serialVersionUID = -1492634488516865570L;
@@ -37,13 +28,13 @@ public class Member implements Serializable {
 
 	private MemberEnabledType enabled;
 
+	private Date regDate;
+
 	private Set<Role> roles = new HashSet<Role>();
 
 	public Member() {
 	}
 
-	@Id
-	@Column(name = "member_id")
 	public String getMemberId() {
 		return memberId;
 	}
@@ -52,7 +43,6 @@ public class Member implements Serializable {
 		this.memberId = memberId;
 	}
 
-	@Column(name = "email")
 	public String getEmail() {
 		return email;
 	}
@@ -61,7 +51,6 @@ public class Member implements Serializable {
 		this.email = email;
 	}
 
-	@Column(name = "name")
 	public String getName() {
 		return name;
 	}
@@ -70,7 +59,6 @@ public class Member implements Serializable {
 		this.name = name;
 	}
 
-	@Column(name = "password")
 	public String getPassword() {
 		return password;
 	}
@@ -79,7 +67,6 @@ public class Member implements Serializable {
 		this.password = password;
 	}
 
-	@Column(name = "enabled")
 	public int getEnabled() {
 		return this.enabled.getCode();
 	}
@@ -88,8 +75,14 @@ public class Member implements Serializable {
 		this.enabled = MemberEnabledType.codeFor(enabled);
 	}
 
-	@ManyToMany
-	@JoinTable(name = "member_role", joinColumns = { @JoinColumn(name = "member_id") }, inverseJoinColumns = { @JoinColumn(name = "role_id") })
+	public Date getRegDate() {
+		return regDate;
+	}
+
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
+	}
+
 	public Set<Role> getRoles() {
 		return roles;
 	}
@@ -98,7 +91,6 @@ public class Member implements Serializable {
 		this.roles = roles;
 	}
 
-	@Transient
 	public String getEnabledStr() {
 		return this.enabled.getName();
 	}
@@ -131,8 +123,7 @@ public class Member implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Member [memberId=" + memberId + ", email=" + email
-				+ ", password=" + password + "]";
+		return ToStringBuilder.reflectionToString(this);
 	}
 
 }

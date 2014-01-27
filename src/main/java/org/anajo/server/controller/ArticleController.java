@@ -2,7 +2,7 @@ package org.anajo.server.controller;
 
 import java.util.List;
 
-import org.anajo.server.comp.article.service.ArticleServiceImpl;
+import org.anajo.server.comp.article.ArticleServiceImpl;
 import org.anajo.server.comp.menu.MenuService;
 import org.anajo.server.comp.menu.model.Menu;
 import org.springframework.beans.factory.annotation.Autowired;

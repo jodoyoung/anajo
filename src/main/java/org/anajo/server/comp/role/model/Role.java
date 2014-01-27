@@ -4,14 +4,9 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-
 import org.anajo.server.comp.member.model.Member;
 import org.anajo.server.comp.menu.model.Menu;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  * 사용자 권한
@@ -19,8 +14,6 @@ import org.anajo.server.comp.menu.model.Menu;
  * @author jodoyoung
  * 
  */
-@Entity
-@Table(name = "role")
 public class Role implements Serializable {
 
 	private static final long serialVersionUID = 36760716119823747L;
@@ -38,8 +31,6 @@ public class Role implements Serializable {
 	public Role() {
 	}
 
-	@Id
-	@Column(name = "role_id")
 	public String getRoleId() {
 		return roleId;
 	}
@@ -48,7 +39,6 @@ public class Role implements Serializable {
 		this.roleId = roleId;
 	}
 
-	@Column(name = "role_name")
 	public String getRoleName() {
 		return roleName;
 	}
@@ -57,7 +47,6 @@ public class Role implements Serializable {
 		this.roleName = roleName;
 	}
 
-	@Column(name = "description")
 	public String getDescription() {
 		return description;
 	}
@@ -66,7 +55,6 @@ public class Role implements Serializable {
 		this.description = description;
 	}
 
-	@ManyToMany(mappedBy = "roles")
 	public Set<Member> getMembers() {
 		return members;
 	}
@@ -75,7 +63,6 @@ public class Role implements Serializable {
 		this.members = members;
 	}
 
-	@ManyToMany(mappedBy = "roles")
 	public Set<Menu> getMenus() {
 		return menus;
 	}
@@ -111,7 +98,7 @@ public class Role implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Role [roleId=" + roleId + ", roleName=" + roleName + "]";
+		return ToStringBuilder.reflectionToString(this);
 	}
 
 }

@@ -7,18 +7,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-import javax.persistence.Transient;
-
 import org.anajo.server.comp.role.model.Role;
-import org.springframework.context.annotation.Lazy;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  * 메뉴
@@ -26,8 +16,6 @@ import org.springframework.context.annotation.Lazy;
  * @author jodoyoung
  * 
  */
-@Entity
-@Table(name = "menu")
 public class Menu implements Serializable {
 
 	private static final long serialVersionUID = 3062645177088323622L;
@@ -47,8 +35,6 @@ public class Menu implements Serializable {
 	public Menu() {
 	}
 
-	@Id
-	@Column(name = "menu_id")
 	public String getMenuId() {
 		return menuId;
 	}
@@ -57,7 +43,6 @@ public class Menu implements Serializable {
 		this.menuId = menuId;
 	}
 
-	@Column(name = "title")
 	public String getTitle() {
 		return title;
 	}
@@ -66,7 +51,6 @@ public class Menu implements Serializable {
 		this.title = title;
 	}
 
-	@Column(name = "link")
 	public String getLink() {
 		return link;
 	}
@@ -75,7 +59,6 @@ public class Menu implements Serializable {
 		this.link = link;
 	}
 
-	@Column(name = "parent")
 	public String getParent() {
 		return parent;
 	}
@@ -84,7 +67,6 @@ public class Menu implements Serializable {
 		this.parent = parent;
 	}
 
-	@Transient
 	public List<Menu> getChilds() {
 		return childs;
 	}
@@ -93,15 +75,28 @@ public class Menu implements Serializable {
 		this.childs = childs;
 	}
 
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "menu_role", joinColumns = { @JoinColumn(name = "menu_id") }, inverseJoinColumns = { @JoinColumn(name = "role_id") })
-	@Lazy(false)
 	public Set<Role> getRoles() {
 		return roles;
 	}
 
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
+	}
+
+	public String getAuthorities() {
+		StringBuilder sb = new StringBuilder();
+
+		Iterator<Role> it = this.roles.iterator();
+
+		while (it.hasNext()) {
+			Role r = it.next();
+			sb.append("'").append(r.getRoleName()).append("'");
+			if (it.hasNext()) {
+				sb.append(",");
+			}
+		}
+
+		return sb.toString();
 	}
 
 	@Override
@@ -129,27 +124,9 @@ public class Menu implements Serializable {
 		return true;
 	}
 
-	@Transient
-	public String getAuthorities() {
-		StringBuilder sb = new StringBuilder();
-
-		Iterator<Role> it = this.roles.iterator();
-
-		while (it.hasNext()) {
-			Role r = it.next();
-			sb.append("'").append(r.getRoleName()).append("'");
-			if (it.hasNext()) {
-				sb.append(",");
-			}
-		}
-
-		return sb.toString();
-	}
-
 	@Override
 	public String toString() {
-		return "Menu [menuId=" + menuId + ", title=" + title + ", link=" + link
-				+ "]";
+		return ToStringBuilder.reflectionToString(this);
 	}
 
 }

@@ -32,7 +32,7 @@ public class RoleController {
 	 */
 	@RequestMapping("")
 	public String roleList(Model model) {
-		model.addAttribute("roles", roleManager.getRoleList());
+		model.addAttribute("roles", roleManager.getRoles());
 		return "admin/role/list.tiles";
 	}
 

@@ -3,35 +3,39 @@ package org.anajo.server.comp.role;
 import java.util.Set;
 
 import org.anajo.server.comp.role.model.Role;
+import org.springframework.stereotype.Repository;
 
 /**
- * 권한 제어 서비스
+ * 권한 데이터 제어
  * 
  * @author jodoyoung
  * 
  */
-public interface RoleManager {
+@Repository
+public interface RoleDao {
 
 	/**
 	 * 권한 목록 조회
 	 * 
 	 * @return
 	 */
-	Set<Role> getRoles();
+	Set<Role> selectRoles();
 
 	/**
 	 * 사용자별 권한 목록 조회
 	 * 
+	 * @param memberId
 	 * @return
 	 */
-	Set<Role> getUserRoles(String memberId);
+	Set<Role> selectUserRoles(String memberId);
 
 	/**
-	 * 메뉴 권한 목록 조회
+	 * 메뉴별 권한 목록 조회
 	 * 
+	 * @param menuId
 	 * @return
 	 */
-	Set<Role> getMenuRoles(String menuId);
+	Set<Role> selectMenuRoles(String menuId);
 
 	/**
 	 * 권한 조회
@@ -39,14 +43,14 @@ public interface RoleManager {
 	 * @param roleId
 	 * @return
 	 */
-	Role getRole(String roleId);
+	Role selectRole(String roleId);
 
 	/**
 	 * 권한 등록
 	 * 
 	 * @param role
 	 */
-	void createRole(Role role);
+	void insertRole(Role role);
 
 	/**
 	 * 권한 수정
