@@ -18,7 +18,7 @@
 </header>
 
 <nav>
-	<c:forEach var="menu" items="${menus}">
+	<c:forEach var="menu" items="${topMenus}">
 		<sec:authorize access="hasAnyRole(${menu.authorities})">
 			<a href="${menu.link}">${menu.title}</a>
 		</sec:authorize>
