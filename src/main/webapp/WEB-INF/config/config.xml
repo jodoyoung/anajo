@@ -5,9 +5,14 @@
 	
 	<entry key="jdbc.anajo.url">jdbc:mariadb://14.47.223.219:33036/anajo</entry>
 	<entry key="jdbc.anajo.dataSource">org.mariadb.jdbc.Driver</entry>
-	<entry key="jdbc.anajo.hibernate.dialect">org.hibernate.dialect.MySQLDialect</entry>
 	<entry key="jdbc.anajo.username">anajo</entry>
 	<entry key="jdbc.anajo.password">whdksk36</entry>
+	<entry key="maxActive">50</entry>
+	<entry key="maxIdle">30000</entry>
+	<entry key="maxWait">60</entry>
+	<entry key="logAbandoned">true</entry>
+	<entry key="removeAbandoned">true</entry>
+	<entry key="removeAbandonedTimeout">60</entry>
 	<entry key="jdbc.anajo.validation.query">SELECT 1</entry>
 
 </properties>
