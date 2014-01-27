@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.anajo.server.comp.menu.MenuService;
 import org.anajo.server.comp.menu.model.Menu;
+import org.anajo.server.comp.role.RoleManager;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -28,10 +29,15 @@ public class MenuInterceptor extends HandlerInterceptorAdapter implements
 			Object handler) {
 		MenuService menuService = (MenuService) appContext
 				.getBean(MenuService.class);
+		RoleManager roleManager = (RoleManager) appContext
+				.getBean(RoleManager.class);
 
 		Collection<Menu> menus = menuService.getMenuList("main");
+		for (Menu menu : menus) {
+			menu.setRoles(roleManager.getMenuRoles(menu.getMenuId()));
+		}
 
-		req.setAttribute("menus", menus);
+		req.setAttribute("topMenus", menus);
 
 		return true;
 	}
