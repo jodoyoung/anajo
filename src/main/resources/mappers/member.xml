@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.anajo.server.comp.member.MemberDao">
+
+	<sql id="memberColumns">
+		member_id AS memberId,
+		email AS email,
+		name AS name,
+		password AS password,
+		enabled AS enabled,
+		reg_date AS regDate
+	</sql>
+
+	<select id="selectMembers" parameterType="Map" resultType="Member">
+		SELECT <include refid="memberColumns"/>
+		FROM member
+		<where>
+			<if test="name != null">
+			name like #{name}
+			</if>
+		</where>
+	</select>
+	
+	<select id="selectMember" parameterType="String" resultType="Member">
+		SELECT <include refid="memberColumns"/>
+		FROM member
+		WHERE member_id = #{member_id} 
+	</select>
+	
+	<select id="selectMemberByEmail" parameterType="String" resultType="Member">
+		SELECT <include refid="memberColumns"/>
+		FROM member
+		WHERE email = #{email} 
+	</select>
+	
+	<insert id="insertMember" parameterType="Member">
+		INSERT INTO member
+			(member_id, email, name, password)
+		VALUES
+			(#{member_id}, #{email}, #{name}, #{password})
+	</insert>
+	
+	<update id="updateMember" parameterType="Member">
+		UPDATE member SET
+			email = #{email}, name = #{name}, password = #{password}  
+		WHERE member_id = #{member_id}
+	</update>
+	
+	<delete id="deleteMember" parameterType="String">
+		DELETE FROM member
+		WHERE member_id = #{member_id}
+	</delete>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

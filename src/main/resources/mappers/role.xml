@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.anajo.server.comp.role.RoleDao">
+
+	<sql id="roleColumns">
+		role_id AS roleId,
+		role_name AS roleName,
+		description AS description
+	</sql>
+	
+	<select id="selectRoles" resultType="Role">
+		SELECT <include refid="roleColumns" />
+		FROM role
+	</select>
+	
+	<select id="selectUserRoles" parameterType="String" resultType="Role">
+		SELECT
+			R.role_id AS roleId,
+			R.role_name AS roleName,
+			R.description AS description
+		FROM role R
+			INNER JOIN member_role M
+			ON R.role_id = M.role_id
+		WHERE M.member_id = #{memberId}
+	</select>
+	
+	<select id="selectMenuRoles" parameterType="String" resultType="Role">
+		SELECT
+			R.role_id AS roleId,
+			R.role_name AS roleName,
+			R.description AS description
+		FROM role R
+			INNER JOIN menu_role M
+			ON R.role_id = M.role_id
+		WHERE M.menu_id = #{menuId}
+	</select>
+	
+	<select id="selectRole" parameterType="string" resultType="Role">
+		SELECT <include refid="roleColumns" />
+		FROM role
+		WHERE role_id = #{role_id}
+	</select>
+	
+	<insert id="insertRole" parameterType="Role">
+		INSERT INTO role
+			(<include refid="roleColumns"/>)
+		VALUES
+			(#{role_id}, #{role_name}, #{description})
+	</insert>
+	
+	<update id="updateRole" parameterType="Role">
+		UPDATE role SET
+			role_name = #{role_name}, description = #{description} 
+		WHERE role_id = #{role_id}
+	</update>
+	
+	<delete id="deleteRole" parameterType="String">
+		DELETE FROM role
+		WHERE role_id = #{role_id}
+	</delete>
+
+</mapper>

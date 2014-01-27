@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.anajo.server.comp.article.ArticleDao">
+
+	<sql id="articleColumns">
+		article_id AS articleId,
+		category AS category,
+		title AS title,
+		content AS content,
+		reg_date AS regDate</sql>
+
+	<select id="selectArticles" resultType="Article">
+		SELECT <include refid="articleColumns"/>
+		FROM article
+	</select>
+
+</mapper>

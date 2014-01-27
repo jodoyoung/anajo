@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.anajo.server.comp.menu.MenuDao">
+
+	<sql id="menuColumns">
+		menu_id AS menuId,
+		title AS title,
+		link AS link,
+		parent AS parent
+	</sql>
+
+	<select id="selectMenus" parameterType="String" resultType="Menu">
+		SELECT <include refid="menuColumns"/>
+		FROM menu
+		<if test="value != null">
+		WHERE parent = #{parentMenuId}
+		</if>
+	</select>
+	
+	<select id="selectMenu" parameterType="String" resultType="Menu">
+		SELECT <include refid="menuColumns"/>
+		FROM menu
+		WHERE menu_id = #{menuId}
+	</select>
+	
+	<insert id="insertMenu" parameterType="Menu">
+		INSERT INTO menu
+			(<include refid="menuColumns"/>)
+		VALUES
+			(#{menu_id}, #{title}, #{link}, #{parent})
+	</insert>
+	
+	<update id="updateMenu" parameterType="Menu">
+		UPDATE menu SET
+			title = #{title}, link = #{link}, parent = #{parent}
+		WHERE menu_id = #{menu_id}
+	</update>
+	
+	<delete id="deleteMenu" parameterType="String">
+		DELETE FROM menu WHERE menu_id = #{menu_id}
+	</delete>
+
+</mapper>
