@@ -26,6 +26,8 @@ public class Menu implements Serializable {
 
 	private String link;
 
+	private MenuVisibleType visible;
+
 	private String parent;
 
 	private List<Menu> childs = new ArrayList<Menu>();
@@ -57,6 +59,22 @@ public class Menu implements Serializable {
 
 	public void setLink(String link) {
 		this.link = link;
+	}
+
+	public MenuVisibleType getVisible() {
+		return visible;
+	}
+
+	public void setVisible(MenuVisibleType visible) {
+		this.visible = visible;
+	}
+
+	public int getVisibleCode() {
+		return visible.getCode();
+	}
+
+	public void setVisibleCode(int code) {
+		this.visible = MenuVisibleType.codeFor(code);
 	}
 
 	public String getParent() {

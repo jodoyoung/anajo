@@ -8,10 +8,10 @@
 <tiles:insertAttribute name="header" />
 </head>
 <body>
-	<div id="wapper">
+	<div id="wrapper">
 
 		<!-- 상단 -->
-		<tiles:insertAttribute name="top" />
+<%-- 		<tiles:insertAttribute name="top" /> --%>
 
 		<!-- 콘텐츠 -->
 		<section>

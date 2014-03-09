@@ -7,6 +7,7 @@ import java.util.Set;
 import org.anajo.server.comp.member.model.Member;
 import org.anajo.server.comp.menu.model.Menu;
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.springframework.security.access.ConfigAttribute;
 
 /**
  * 사용자 권한
@@ -14,7 +15,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
  * @author jodoyoung
  * 
  */
-public class Role implements Serializable {
+public class Role implements Serializable, ConfigAttribute {
 
 	private static final long serialVersionUID = 36760716119823747L;
 
@@ -69,6 +70,11 @@ public class Role implements Serializable {
 
 	public void setMenus(Set<Menu> menus) {
 		this.menus = menus;
+	}
+
+	@Override
+	public String getAttribute() {
+		return this.roleName;
 	}
 
 	@Override

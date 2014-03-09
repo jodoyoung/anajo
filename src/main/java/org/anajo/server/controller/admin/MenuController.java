@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,7 +28,7 @@ public class MenuController {
 	@RequestMapping("")
 	public String menuList(Model model) {
 		model.addAttribute("menus", menuService.getMenuList());
-		return "admin/menu/list.tiles";
+		return "admin/menu/list.admin";
 	}
 
 	/**
@@ -39,7 +40,7 @@ public class MenuController {
 	@RequestMapping(value = "/read")
 	public String Menu(@RequestParam String menuId, Model model) {
 		model.addAttribute("menu", menuService.getMenu(menuId));
-		return "admin/menu/read.tiles";
+		return "admin/menu/read.admin";
 	}
 
 	/**
@@ -50,7 +51,7 @@ public class MenuController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String writeCreateMenu(Model model) {
 		model.addAttribute("menuId", IdGenerator.createUUID());
-		return "admin/menu/create.tiles";
+		return "admin/menu/create.admin";
 	}
 
 	/**
@@ -60,7 +61,8 @@ public class MenuController {
 	 * @return
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public String createMenu(@ModelAttribute Menu menu) {
+	public String createMenu(@RequestBody Menu menu) {
+		menu.setMenuId(IdGenerator.createUUID());
 		menuService.createMenu(menu);
 		return "forward:/admin/menu";
 	}
@@ -74,7 +76,7 @@ public class MenuController {
 	@RequestMapping(value = "/update", method = RequestMethod.GET)
 	public String writeUpdateMenu(@RequestParam String menuId, Model model) {
 		model.addAttribute("menu", menuService.getMenu(menuId));
-		return "admin/menu/update.tiles";
+		return "admin/menu/update.admin";
 	}
 
 	/**

@@ -33,7 +33,7 @@ public class RoleController {
 	@RequestMapping("")
 	public String roleList(Model model) {
 		model.addAttribute("roles", roleManager.getRoles());
-		return "admin/role/list.tiles";
+		return "admin/role/list.admin";
 	}
 
 	/**
@@ -45,7 +45,7 @@ public class RoleController {
 	@RequestMapping(value = "/read")
 	public String role(@RequestParam String roleId, Model model) {
 		model.addAttribute("role", roleManager.getRole(roleId));
-		return "admin/role/read.tiles";
+		return "admin/role/read.admin";
 	}
 
 	/**
@@ -56,7 +56,7 @@ public class RoleController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String writeCreateRole(Model model) {
 		model.addAttribute("roleId", IdGenerator.createUUID());
-		return "admin/role/create.tiles";
+		return "admin/role/create.admin";
 	}
 
 	/**
@@ -80,7 +80,7 @@ public class RoleController {
 	@RequestMapping(value = "/update", method = RequestMethod.GET)
 	public String writeUpdateRole(@RequestParam String roleId, Model model) {
 		model.addAttribute("role", roleManager.getRole(roleId));
-		return "admin/role/update.tiles";
+		return "admin/role/update.admin";
 	}
 
 	/**

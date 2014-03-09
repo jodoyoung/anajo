@@ -11,6 +11,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 
+/**
+ * 로그인 성공시 수행될 작업
+ * 
+ * @see SavedRequestAwareAuthenticationSuccessHandler 요청이 넘어온 url로 돌려준다
+ * @author jodoyoung
+ * 
+ */
 public class AuthenticationSuccessHandler extends
 		SavedRequestAwareAuthenticationSuccessHandler {
 	private static final Logger log = LoggerFactory

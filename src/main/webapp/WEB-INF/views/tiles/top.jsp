@@ -12,15 +12,17 @@
 			<a href="<c:url value="/auth/loginPage" />">로그인</a>
 		</sec:authorize>
 		<sec:authorize access="hasRole('ROLE_USER')">
-			<a href="<c:url value="/auth/logout" />">로그아웃</a>
+			<a href="<c:url value="/auth/logout" />" class="button">로그아웃</a>
 		</sec:authorize>
 	</div>
 </header>
 
 <nav>
 	<c:forEach var="menu" items="${topMenus}">
-		<sec:authorize access="hasAnyRole(${menu.authorities})">
-			<a href="${menu.link}">${menu.title}</a>
-		</sec:authorize>
+		<c:if test="${menu.visibleCode == 1}">
+			<sec:authorize access="hasAnyRole(${menu.authorities})">
+				<a href="${menu.link}">${menu.title}</a>
+			</sec:authorize>
+		</c:if>
 	</c:forEach>	
 </nav>

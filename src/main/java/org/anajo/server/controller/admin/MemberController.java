@@ -39,7 +39,7 @@ public class MemberController {
 	public String memberList(@RequestParam Map<String, Object> searchValues,
 			Model model) {
 		model.addAttribute("members", memberService.getMemberList(searchValues));
-		return "admin/member/list.tiles";
+		return "admin/member/list.admin";
 	}
 
 	/**
@@ -52,7 +52,7 @@ public class MemberController {
 	@RequestMapping(value = "/read")
 	public String member(@RequestParam String memberId, Model model) {
 		model.addAttribute("member", memberService.getMember(memberId));
-		return "admin/member/read.tiles";
+		return "admin/member/read.admin";
 	}
 
 	/**
@@ -65,7 +65,7 @@ public class MemberController {
 	public String writeCreateMember(Model model) {
 		model.addAttribute("memberId", IdGenerator.createUUID());
 		model.addAttribute("enabledType", MemberEnabledType.values());
-		return "admin/member/create.tiles";
+		return "admin/member/create.admin";
 	}
 
 	/**
@@ -91,7 +91,7 @@ public class MemberController {
 	public String writeUpdateMember(@RequestParam String memberId, Model model) {
 		model.addAttribute("member", memberService.getMember(memberId));
 		model.addAttribute("enabledType", MemberEnabledType.values());
-		return "admin/member/update.tiles";
+		return "admin/member/update.admin";
 	}
 
 	/**

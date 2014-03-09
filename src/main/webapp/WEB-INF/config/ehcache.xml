@@ -15,7 +15,7 @@
         memoryStoreEvictionPolicy="LRU">
 	</defaultCache>
  
- 	<cache name="CacheExample"
+ 	<cache name="testCache"
         maxElementsInMemory="10000"
         eternal="false"
         timeToIdleSeconds="0"

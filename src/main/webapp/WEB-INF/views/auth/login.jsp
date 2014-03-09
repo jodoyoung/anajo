@@ -1,25 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<p>로그인</p>
 
-<article>
-
+<article class="login">
+	<div class="logo">
+		<a href="<c:url value="/" />"><img src="<c:url value="/resources/img/logo.png" />" alt="anajo" /></a>
+	</div>
+	<div class="loginBox">
 	<form action="/auth/login" method='POST'>
-		<table>
-			<tr>
-				<td><c:out value="test" />User:
-				<td><input type='text' name='email' value=''>
-			<tr>
-				<td>Password:
-				<td><input type='password' name='password' />
-			<tr>
-				<td colspan='2'><input name="submit" type="submit"
-					value="submit" />
-			<tr>
-				<td colspan='2'><input name="reset" type="reset" />
-		</table>
-
+		<input type="text" name="email" placeholder="이메일" /><br/>
+		<input type="password" name="password" placeholder="비밀번호" /><br/><br/><br/>
+		<input name="submit" type="submit" value="로그인" class="button" />
 	</form>
+	</div>
 
 </article>

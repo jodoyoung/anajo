@@ -6,6 +6,7 @@
 		menu_id AS menuId,
 		title AS title,
 		link AS link,
+		visible AS visibleCode,
 		parent AS parent
 	</sql>
 
@@ -25,19 +26,19 @@
 	
 	<insert id="insertMenu" parameterType="Menu">
 		INSERT INTO menu
-			(<include refid="menuColumns"/>)
+			(menu_id, title, link, parent)
 		VALUES
-			(#{menu_id}, #{title}, #{link}, #{parent})
+			(#{menuId}, #{title}, #{link}, #{parent})
 	</insert>
 	
 	<update id="updateMenu" parameterType="Menu">
 		UPDATE menu SET
 			title = #{title}, link = #{link}, parent = #{parent}
-		WHERE menu_id = #{menu_id}
+		WHERE menu_id = #{menuId}
 	</update>
 	
 	<delete id="deleteMenu" parameterType="String">
-		DELETE FROM menu WHERE menu_id = #{menu_id}
+		DELETE FROM menu WHERE menu_id = #{menuId}
 	</delete>
 
 </mapper>

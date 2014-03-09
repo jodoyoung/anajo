@@ -30,6 +30,6 @@ public class MainController {
 
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public String admin(Model model) {
-		return "admin/admin.tiles";
+		return "admin/admin.admin";
 	}
 }

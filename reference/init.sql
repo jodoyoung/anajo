@@ -58,6 +58,7 @@ CREATE TABLE menu (
 	menu_id CHAR(32) NOT NULL COMMENT '메뉴 ID',
 	title VARCHAR(50) NOT NULL COMMENT '메뉴명',
 	link VARCHAR(100) NOT NULL COMMENT '메뉴 링크 주소',
+	visible SMALLINT DEFAULT 1 NOT NULL COMMENT '화면 노출 상태',
 	parent CHAR(32) COMMENT '상위 메뉴 ID',
 	PRIMARY KEY (menu_id)
 );

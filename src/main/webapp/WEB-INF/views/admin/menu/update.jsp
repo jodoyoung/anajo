@@ -21,3 +21,11 @@
 	</form>
 
 </article>
+
+<script type="text/javascript">
+var MenuUpdate = new $A.APage('menuUpdate');
+
+MenuUpdate.doUpdate = function() {
+	
+};
+</script>

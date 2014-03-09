@@ -13,8 +13,21 @@
 		<put-attribute name="content" value="" />
 		<put-attribute name="footer" value="/WEB-INF/views/tiles/footer.jsp" />
 	</definition>
+	
+	<definition name="admin-layout" template="/WEB-INF/views/tiles/layout-admin.jsp">
+		<put-attribute name="common" value="/WEB-INF/views/tiles/common.jsp" />
+		<put-attribute name="header" value="/WEB-INF/views/tiles/header.jsp" />
+		<put-attribute name="top" value="/WEB-INF/views/tiles/top.jsp" />
+		<!-- put-attribute name="side" value="/WEB-INF/views/tiles/side.jsp" / -->
+		<put-attribute name="content" value="" />
+		<put-attribute name="footer" value="/WEB-INF/views/tiles/footer.jsp" />
+	</definition>
 
 	<definition name="**.tiles" extends="default-layout">
+		<put-attribute name="content" value="/WEB-INF/views/{1}.jsp" />
+	</definition>
+	
+	<definition name="**.admin" extends="admin-layout">
 		<put-attribute name="content" value="/WEB-INF/views/{1}.jsp" />
 	</definition>
 
