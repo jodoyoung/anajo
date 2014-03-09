@@ -1,0 +1,27 @@
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<table class="list">
+	<tr>
+		<th>권한명</th>
+		<th>설명</th>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+	</tr>
+</table>
+
+<script id="rowTemplate" type="text/x-handlebars-template">
+  template content
+</script>
+
+<script type="text/javascript">
+var RoleWidget = $A.APage('RoleWidget');
+
+$.ajax({ url: '/admin/role.json',
+	success: function(result) {
+		var source   = $("#rowTemplate").html();
+		var template = Handlebars.compile(source);
+	}
+});
+</script>
