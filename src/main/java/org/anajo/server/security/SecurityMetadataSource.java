@@ -8,8 +8,8 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.web.FilterInvocation;
@@ -24,9 +24,8 @@ import org.springframework.security.web.util.matcher.RequestMatcher;
  */
 public class SecurityMetadataSource implements
 		FilterInvocationSecurityMetadataSource {
-
-	protected final static Log logger = LogFactory
-			.getLog(SecurityMetadataSource.class);
+			
+	protected final static Logger logger = LoggerFactory.getLogger(SecurityMetadataSource.class);
 
 	private Map<RequestMatcher, Collection<ConfigAttribute>> requestMap;
 
